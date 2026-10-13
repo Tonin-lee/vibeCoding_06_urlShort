@@ -12,11 +12,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
   <link rel="stylesheet" href="../hub.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../theme.css">
 </head>
 <body>
+  <div class="site-gradient" aria-hidden="true"></div>
   <header class="hub-header">
     <a href="../index.html" class="brand" id="linkHome" title="홈으로">
-      <span class="brand-mark">L</span>
+      <img class="brand-image" src="../url2qr/img/logo.png" alt="URL2QR">
       <span class="brand-name">Link Toolkit</span>
     </a>
     <a href="../url2qr/index.html" class="badge nav-badge" id="linkToQr">QR코드 만들기 →</a>
@@ -40,7 +42,7 @@
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
               <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
             </svg>
-            <input type="url" id="urlInput" class="text-input"
+            <input type="url" id="urlInput" value="https://www.naver.com/" class="text-input"
                    placeholder="https://example.com/very/long/url..."
                    spellcheck="false" aria-describedby="inputHint">
           </div>
@@ -99,5 +101,6 @@
   <footer class="hub-footer">Powered by is.gd OpenAPI · © 2026 Link Toolkit</footer>
 
   <script src="js/app.js"></script>
+  <script src="../gradient.js"></script>
 </body>
 </html>

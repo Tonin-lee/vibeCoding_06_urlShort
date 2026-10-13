@@ -21,8 +21,10 @@
       document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>');
     }
   </script>
+  <link rel="stylesheet" href="../theme.css">
 </head>
 <body>
+  <div class="site-gradient" aria-hidden="true"></div>
   <!-- Interactive Dynamic Gradient & Ambient Background -->
   <div class="dynamic-background" id="dynamicBackground"></div>
   <div class="bg-glow bg-glow-1"></div>
@@ -114,7 +116,7 @@
           
           <input 
             type="text" 
-            id="urlInput" 
+            id="urlInput" value="https://www.naver.com/" 
             class="url-input-field" 
             placeholder="URL을 입력하세요 (예: https://naver.com)"
             aria-label="생성할 QR 코드의 URL 입력"
@@ -155,5 +157,6 @@
 
   <!-- JavaScript -->
   <script src="js/app.js"></script>
+  <script src="../gradient.js"></script>
 </body>
 </html>

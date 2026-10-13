@@ -25,54 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // Interactive Cursor-following Gradient Engine
   // --------------------------------------------------------------------------
-  let targetX = window.innerWidth / 2;
-  let targetY = window.innerHeight * 0.45;
-  let currentX = targetX;
-  let currentY = targetY;
-
-  window.addEventListener('mousemove', (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
-  });
-
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches && e.touches[0]) {
-      targetX = e.touches[0].clientX;
-      targetY = e.touches[0].clientY;
-    }
-  }, { passive: true });
-
-  function updateDynamicGradient() {
-    // Silky smooth lerp interpolation
-    currentX += (targetX - currentX) * 0.085;
-    currentY += (targetY - currentY) * 0.085;
-
-    const width = window.innerWidth || 1920;
-    const height = window.innerHeight || 1080;
-    const ratioX = Math.max(0, Math.min(1, currentX / width));
-    const ratioY = Math.max(0, Math.min(1, currentY / height));
-
-    // Calculate dynamic hues harmonizing with the yellow logo
-    // Hue 1: Warm Amber / Gold (36° ~ 52°)
-    const hue1 = Math.round(36 + ratioX * 16 - ratioY * 10);
-    // Hue 2: Soft Peach / Sunset Orange (20° ~ 42°)
-    const hue2 = Math.round(20 + ratioY * 18 + ratioX * 8);
-    // Hue 3: Subtle Coral / Warm Rose (340° ~ 360°)
-    const hue3 = Math.round(340 + ratioX * 20);
-
-    const rootStyle = document.documentElement.style;
-    rootStyle.setProperty('--mouse-x', `${currentX.toFixed(1)}px`);
-    rootStyle.setProperty('--mouse-y', `${currentY.toFixed(1)}px`);
-    rootStyle.setProperty('--mouse-percent-x', (ratioX - 0.5).toFixed(3));
-    rootStyle.setProperty('--mouse-percent-y', (ratioY - 0.5).toFixed(3));
-    rootStyle.setProperty('--glow-color-1', `hsla(${hue1}, 96%, 60%, 0.44)`);
-    rootStyle.setProperty('--glow-color-2', `hsla(${hue2}, 95%, 68%, 0.44)`);
-    rootStyle.setProperty('--glow-color-3', `hsla(${hue3}, 88%, 76%, 0.28)`);
-
-    requestAnimationFrame(updateDynamicGradient);
-  }
-
-  requestAnimationFrame(updateDynamicGradient);
+  // 공통 gradient.js에서 배경 효과를 처리합니다.
 
   // --------------------------------------------------------------------------
   // Helper: Toast Notification

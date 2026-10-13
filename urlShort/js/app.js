@@ -60,19 +60,34 @@
       const cbName = `__urlShortCb_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
       const script = document.createElement('script');
       const query = new URLSearchParams({ ...params, callback: cbName }).toString();
+      let settled = false;
 
       const cleanup = () => {
         clearTimeout(timer);
+        script.onload = null;
+        script.onerror = null;
         delete window[cbName];
         script.remove();
       };
-      const timer = setTimeout(() => {
+      const fail = (message) => {
+        if (settled) return;
+        settled = true;
         cleanup();
-        reject(new Error('요청 시간이 초과되었습니다.'));
+        reject(new Error(message));
+      };
+      const timer = setTimeout(() => {
+        fail('요청 시간이 초과되었습니다. 네트워크 연결 또는 단축 서비스 상태를 확인해 주세요.');
       }, TIMEOUT_MS);
 
-      window[cbName] = (data) => { cleanup(); resolve(data); };
-      script.onerror = () => { cleanup(); reject(new Error('네트워크 오류가 발생했습니다.')); };
+      window[cbName] = (data) => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        resolve(data);
+      };
+      // HTTP 200이어도 오류 문자열만 반환하면 JSONP 콜백이 실행되지 않습니다.
+      script.onload = () => fail('단축 서비스가 비정상 응답을 반환했습니다. 잠시 후 다시 시도해 주세요.');
+      script.onerror = () => fail('단축 서비스 응답을 불러오지 못했습니다. 네트워크 연결 또는 요청 차단 여부를 확인해 주세요.');
       script.src = `${baseUrl}?${query}`;
       document.body.appendChild(script);
     });
@@ -80,20 +95,20 @@
 
   // ===== 3-3. OpenAPI로 URL 단축 요청 =====
   async function requestShortUrl(longUrl) {
-    let lastError = null;
+    const failures = [];
     for (const api of API_ENDPOINTS) {
       try {
         const data = await jsonp(api.url, { format: 'json', url: longUrl });
         if (data && data.shorturl) return { shortUrl: data.shorturl, provider: api.name };
         // API가 오류코드를 반환한 경우 (1: 잘못된 URL 등) → 다음 API 시도 없이 즉시 실패
         if (data && data.errorcode === 1) throw Object.assign(new Error(data.errormessage), { fatal: true });
-        lastError = new Error((data && data.errormessage) || '알 수 없는 응답입니다.');
+        throw new Error((data && data.errormessage) || '알 수 없는 응답입니다.');
       } catch (err) {
         if (err.fatal) throw err;
-        lastError = err;
+        failures.push(`${api.name}: ${err.message}`);
       }
     }
-    throw lastError || new Error('URL 단축에 실패했습니다.');
+    throw new Error(failures.join(' / ') || 'URL 단축에 실패했습니다.');
   }
 
   form.addEventListener('submit', async (e) => {
