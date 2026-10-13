@@ -1,0 +1,152 @@
+/* ==========================================================================
+   URL Shortener - page-specific styles (base tokens come from ../hub.css)
+   ========================================================================== */
+.short-main { max-width: 640px; }
+.short-main .hero { margin-bottom: 40px; }
+
+.nav-badge { text-decoration: none; transition: background 0.2s, color 0.2s; }
+.nav-badge:hover { background: var(--primary-soft); color: var(--primary); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Card ---------- */
+.short-card {
+  display: flex; flex-direction: column; gap: 28px;
+  padding: clamp(24px, 4vw, 36px); border-radius: 24px;
+  background: var(--bg); border: 1px solid var(--border); box-shadow: var(--shadow-md);
+  animation: fadeUp 0.6s var(--ease) 0.08s both;
+}
+
+.field-group { display: flex; flex-direction: column; gap: 8px; }
+.field-label { font-size: 0.88rem; font-weight: 600; color: var(--text-sub); }
+
+.input-row { display: flex; gap: 8px; }
+.input-wrap { position: relative; flex: 1; display: flex; align-items: center; }
+.input-icon {
+  position: absolute; left: 16px; width: 18px; height: 18px;
+  color: var(--text-muted); pointer-events: none; transition: color 0.2s;
+}
+.text-input {
+  width: 100%; height: 54px; padding: 0 16px 0 44px;
+  font: 500 1rem var(--font); color: var(--text-main);
+  background: var(--bg-muted); border: 1.5px solid transparent; border-radius: 14px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.text-input::placeholder { color: var(--text-muted); }
+.text-input:focus {
+  outline: none; background: var(--bg); border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(49, 130, 246, 0.12);
+}
+.input-wrap:focus-within .input-icon { color: var(--primary); }
+
+/* Read-only output box */
+.output-input {
+  background: var(--bg-soft); border: 1.5px dashed var(--border-strong); cursor: default;
+  font-family: 'Outfit', var(--font); font-weight: 600; color: var(--text-main);
+}
+.output-input:focus { background: var(--bg-soft); border-color: var(--border-strong); box-shadow: none; }
+.result-group.has-result .output-input {
+  border-style: solid; border-color: var(--mint); background: var(--mint-soft); color: #00806D;
+  animation: pop 0.4s var(--ease);
+}
+.result-group.has-result .input-icon { color: var(--mint); }
+@keyframes pop {
+  0% { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+.hint { font-size: 0.8rem; color: var(--text-muted); }
+.result-meta { min-height: 1.2em; word-break: break-all; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 54px; padding: 0 24px; border: none; border-radius: 14px;
+  font: 600 1rem var(--font); cursor: pointer; white-space: nowrap;
+  transition: background 0.2s, transform 0.15s, opacity 0.2s;
+}
+.btn svg { width: 17px; height: 17px; }
+.btn:not(:disabled):active { transform: scale(0.97); }
+.btn:disabled { cursor: not-allowed; background: var(--bg-muted); color: var(--text-muted); }
+
+.btn-primary { min-width: 112px; color: #fff; background: var(--primary); }
+.btn-primary:not(:disabled):hover { background: var(--primary-hover); }
+
+.btn-dark { color: var(--primary); background: var(--primary-soft); }
+.btn-dark:not(:disabled):hover { background: #D6E9FF; }
+
+/* Loading spinner */
+.spinner {
+  display: none; width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45); border-top-color: #fff;
+  animation: spin 0.7s linear infinite;
+}
+.btn.loading { background: var(--primary); }
+.btn.loading .btn-label { display: none; }
+.btn.loading .spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-msg {
+  display: none; padding: 12px 14px; border-radius: 12px;
+  font-size: 0.88rem; font-weight: 500; color: #E42939; background: #FFEEEE;
+}
+.error-msg.show { display: block; animation: fadeUp 0.3s var(--ease); }
+
+/* ---------- History ---------- */
+.history { margin-top: 40px; animation: fadeUp 0.5s var(--ease) both; }
+.history-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding: 0 4px; }
+.history-head h2 { font-size: 1rem; font-weight: 700; }
+.btn-text {
+  border: none; background: none; cursor: pointer;
+  font: 500 0.85rem var(--font); color: var(--text-muted); transition: color 0.2s;
+}
+.btn-text:hover { color: #E42939; }
+
+.history-list { list-style: none; display: flex; flex-direction: column; }
+.history-item {
+  display: flex; align-items: center; gap: 12px; padding: 14px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.history-item:last-child { border-bottom: none; }
+.history-text { flex: 1; min-width: 0; }
+.history-short {
+  display: block; font-family: 'Outfit', var(--font); font-weight: 600;
+  color: var(--primary); text-decoration: none;
+}
+.history-short:hover { text-decoration: underline; }
+.history-long {
+  display: block; margin-top: 2px; font-size: 0.8rem; color: var(--text-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.history-copy {
+  flex-shrink: 0; display: grid; place-items: center; width: 36px; height: 36px;
+  border: none; border-radius: 10px; background: transparent;
+  color: var(--text-muted); cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.history-copy:hover { color: var(--primary); background: var(--primary-soft); }
+.history-copy svg { width: 16px; height: 16px; }
+
+/* ---------- Toast (복사하였습니다 알림창) ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 32px; z-index: 100;
+  display: flex; align-items: center; gap: 10px; padding: 13px 20px; border-radius: 14px;
+  font-size: 0.95rem; font-weight: 600; color: #fff; background: rgba(25, 31, 40, 0.94);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  opacity: 0; pointer-events: none; transform: translate(-50%, 16px);
+  transition: opacity 0.3s var(--ease), transform 0.4s var(--ease);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast-icon {
+  display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--mint);
+}
+.toast-icon svg { width: 12px; height: 12px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 560px) {
+  .input-row { flex-direction: column; }
+  .btn { width: 100%; }
+}

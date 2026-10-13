@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL 단축기 | Link Toolkit</title>
+  <meta name="description" content="긴 URL을 짧은 링크로 즉시 변환하고 클릭 한 번으로 복사하세요.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../hub.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hub-header">
+    <a href="../index.html" class="brand" id="linkHome" title="홈으로">
+      <span class="brand-mark">L</span>
+      <span class="brand-name">Link Toolkit</span>
+    </a>
+    <a href="../url2qr/index.html" class="badge nav-badge" id="linkToQr">QR코드 만들기 →</a>
+  </header>
+
+  <main class="hub-main short-main">
+    <section class="hero">
+      <h1><span class="gradient-text">짧고 깔끔하게</span><br>URL 단축기</h1>
+      <p>긴 URL을 붙여넣고 <strong>단축하기</strong>를 누르면 공유하기 좋은 짧은 링크가 생성됩니다.</p>
+    </section>
+
+    <section class="short-card" aria-labelledby="shortTitle">
+      <h2 id="shortTitle" class="sr-only">URL 단축 도구</h2>
+
+      <!-- 3-1. URL 입력창 + 단축하기 버튼 -->
+      <form id="shortForm" class="field-group" autocomplete="off" novalidate>
+        <label for="urlInput" class="field-label">URL 입력</label>
+        <div class="input-row">
+          <div class="input-wrap">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <input type="url" id="urlInput" class="text-input"
+                   placeholder="https://example.com/very/long/url..."
+                   spellcheck="false" aria-describedby="inputHint">
+          </div>
+          <!-- 3-2. 입력이 비어 있으면 disabled -->
+          <button type="submit" id="btnShorten" class="btn btn-primary" disabled>
+            <span class="btn-label">단축하기</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+        <p id="inputHint" class="hint">http:// 또는 https:// 가 없으면 자동으로 https:// 가 붙습니다.</p>
+      </form>
+
+      <!-- 3-1. 읽기 전용 출력 상자 + 3-4. 복사 버튼 -->
+      <div class="field-group result-group" id="resultGroup">
+        <label for="resultOutput" class="field-label">단축 결과</label>
+        <div class="input-row">
+          <div class="input-wrap output-wrap">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <input type="text" id="resultOutput" class="text-input output-input" readonly
+                   placeholder="단축된 URL이 여기에 표시됩니다" aria-live="polite">
+          </div>
+          <button type="button" id="btnCopy" class="btn btn-dark" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>복사</span>
+          </button>
+        </div>
+        <p id="resultMeta" class="hint result-meta"></p>
+      </div>
+
+      <p id="errorMsg" class="error-msg" role="alert"></p>
+    </section>
+
+    <!-- 최근 단축 기록 -->
+    <section class="history" id="historySection" hidden>
+      <div class="history-head">
+        <h2>최근 단축 기록</h2>
+        <button type="button" class="btn-text" id="btnClearHistory">전체 삭제</button>
+      </div>
+      <ul class="history-list" id="historyList"></ul>
+    </section>
+  </main>
+
+  <!-- 3-4. '복사하였습니다' 알림창 -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </span>
+    <span id="toastMsg">복사하였습니다</span>
+  </div>
+
+  <footer class="hub-footer">Powered by is.gd OpenAPI · © 2026 Link Toolkit</footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

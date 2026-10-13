@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Link Toolkit - Shared Design System
+   Minimal & fresh (inspired by Toss / Linear / Vercel)
+   ========================================================================== */
+:root {
+  --bg: #FFFFFF;
+  --bg-soft: #F7F8FA;
+  --bg-muted: #F2F4F6;
+  --border: #E5E8EB;
+  --border-strong: #D1D6DB;
+
+  --primary: #3182F6;
+  --primary-hover: #1B64DA;
+  --primary-soft: #E8F3FF;
+  --mint: #00C4A7;
+  --mint-soft: #E6FAF6;
+
+  --text-main: #191F28;
+  --text-sub: #4E5968;
+  --text-muted: #8B95A1;
+
+  --radius: 16px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 27, 55, 0.08);
+  --font: 'Pretendard', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+body { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ---------- Header ---------- */
+.hub-header {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 clamp(20px, 5vw, 48px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand-mark {
+  display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px;
+  font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff;
+  background: var(--primary);
+}
+.brand-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+  font-size: 0.8rem; font-weight: 600; color: var(--text-sub);
+  background: var(--bg-muted); border-radius: 999px;
+}
+.pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
+
+/* ---------- Layout / Hero ---------- */
+.hub-main {
+  flex: 1; width: 100%; max-width: 920px; margin: 0 auto;
+  padding: clamp(56px, 12vh, 112px) 24px 64px;
+}
+.hero { text-align: center; margin-bottom: 56px; animation: fadeUp 0.6s var(--ease) both; }
+.hero h1 {
+  font-size: clamp(2rem, 4.6vw, 3rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.035em;
+}
+.gradient-text { color: var(--primary); }
+.hero p { margin-top: 16px; color: var(--text-sub); font-size: 1.05rem; line-height: 1.7; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Tool cards (QR코드 / URL단축 buttons) ---------- */
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+
+.tool-card {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 32px 28px; border-radius: 20px; text-decoration: none; color: inherit;
+  background: var(--bg-soft); border: 1px solid transparent;
+  transition: background 0.25s, border-color 0.25s, transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  animation: fadeUp 0.6s var(--ease) both;
+}
+.tool-card:nth-child(2) { animation-delay: 0.08s; }
+.tool-card:hover, .tool-card:focus-visible {
+  background: var(--bg); border-color: var(--border);
+  transform: translateY(-4px); box-shadow: var(--shadow-md); outline: none;
+}
+
+.tool-icon {
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; margin-bottom: 10px;
+}
+.tool-icon svg { width: 26px; height: 26px; }
+.tool-icon.qr { color: var(--primary); background: var(--primary-soft); }
+.tool-icon.short { color: var(--mint); background: var(--mint-soft); }
+
+.tool-card h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; }
+.tool-card p { color: var(--text-sub); line-height: 1.6; font-size: 0.97rem; }
+
+.tool-cta {
+  margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.95rem; font-weight: 600; color: var(--primary);
+}
+.tool-cta svg { width: 16px; height: 16px; transition: transform 0.3s var(--ease); }
+.tool-card:hover .tool-cta svg { transform: translateX(4px); }
+
+/* ---------- Footer ---------- */
+.hub-footer {
+  text-align: center; padding: 28px; font-size: 0.82rem; color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}

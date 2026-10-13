@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link Toolkit | QR 코드 생성 & URL 단축</title>
+  <meta name="description" content="URL을 QR 코드로 변환하거나 짧은 URL로 단축할 수 있는 올인원 링크 도구입니다.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="hub.css">
+</head>
+<body>
+  <header class="hub-header">
+    <div class="brand">
+      <span class="brand-mark">L</span>
+      <span class="brand-name">Link Toolkit</span>
+    </div>
+    <div class="badge"><span class="pulse"></span>All-in-One</div>
+  </header>
+
+  <main class="hub-main">
+    <section class="hero">
+      <h1><span class="gradient-text">링크를 더 스마트하게</span><br>QR 코드 & URL 단축</h1>
+      <p>원하는 기능을 선택하세요. 긴 URL을 QR 코드로 만들거나, 짧고 깔끔한 링크로 바꿀 수 있습니다.</p>
+    </section>
+
+    <nav class="tool-grid" aria-label="기능 선택">
+      <a href="url2qr/index.html" class="tool-card" id="btnQrCode">
+        <div class="tool-icon qr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            <path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"></path>
+          </svg>
+        </div>
+        <h2>QR코드</h2>
+        <p>URL을 입력해 고해상도 QR 코드를 만들고 JPG로 다운로드하세요.</p>
+        <span class="tool-cta">QR코드 만들기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </span>
+      </a>
+
+      <a href="urlShort/index.html" class="tool-card" id="btnUrlShort">
+        <div class="tool-icon short">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+        </div>
+        <h2>URL단축</h2>
+        <p>길고 복잡한 URL을 짧은 링크로 변환하고 클릭 한 번으로 복사하세요.</p>
+        <span class="tool-cta">URL 단축하기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </span>
+      </a>
+    </nav>
+  </main>
+
+  <footer class="hub-footer">© 2026 Link Toolkit · QR Code & URL Shortener</footer>
+</body>
+</html>
